@@ -11,7 +11,7 @@ def main():
     '''
     Docstring for main
     '''
-    input_dir = Path("/data")
+    input_dir = Path("/app/data")
 
     file = [f for f in input_dir.iterdir() if f.is_file()]
     path_to_script = "implementation/visual.py"
@@ -26,4 +26,5 @@ def main():
         print(f"Помилка при запуску візуалізації: {e}")
 
 if __name__ == "__main__":
+
     main()

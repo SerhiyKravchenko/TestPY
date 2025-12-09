@@ -17,3 +17,4 @@ RUN mkdir -p /app/data /app/frames
 
 # Run file (for now test file)
 CMD ["python", "main.py"]
+

@@ -10,6 +10,7 @@ def main():
         print("Файлу не існує! Перевір шлях і спробуй ще раз.")
         return
 
+    input_datafile_dir = os.path.dirname(input_datafile)
     input_datafile = os.path.abspath(input_datafile)
 
 
@@ -23,9 +24,9 @@ def main():
     container_frames_dir = "/app/frames" # Where the app writes images (mounted)
 
 # The file path inside the container
-    container_input_path = os.path.join(container_data_dir, os.path.basename(input_datafile))
+    container_input_path = container_data_dir #os.path.join(container_data_dir, os.path.basename(input_datafile)).replace('\\', '/')
 
-    print("\nСтворюю Docker image...")
+    print(f"\nСтворюю Docker image... з файлом {input_datafile}")
     # NOTE: The build command MUST NOT contain --build-arg LOCALFILE now
     build_cmd = 'docker build -t standings .'
     
@@ -36,11 +37,11 @@ def main():
         return
 
     run_cmd = (
-        f'docker run --rm ' # --rm removes the container after it exits
-        
+        f'docker run --rm ' # --rm removes the container after it exits   --rm
+        '--name standings_proc '
         # 1. Mount the local input file directly to the internal container file path.
         # We mount it to the expected /app/data/file.name path.
-        f'-v "{input_datafile}":"{container_input_path}":ro '
+        f'-v "{input_datafile_dir}":"{container_input_path}":ro '
         
         # 2. Mount the local output directory to the app's hardcoded output directory.
         f'-v "{local_output_dir}":"{container_frames_dir}" '
@@ -60,5 +61,5 @@ def main():
     
     print(f"\n✅ Завершено. Результати (frames) у теці: {local_output_dir}")
 
- if __name__ == "__main__":
+if __name__ == "__main__":
     main()

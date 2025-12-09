@@ -13,11 +13,15 @@ def main():
     '''
     input_dir = Path("/app/data")
 
-    file = [f for f in input_dir.iterdir() if f.is_file()]
+    files = [f for f in input_dir.iterdir() if f.is_file()]
     path_to_script = "implementation/visual.py"
 
+    input_file_path_str = files[0].as_posix() # Використовуємо .as_posix() для гарантії '/' слешів у Linux
+
+    print(f"Передаю файл для обробки: {input_file_path_str}")
+
     # Передаємо шлях до visual.py як аргумент
-    command = ["python", path_to_script, file]
+    command = ["python", path_to_script, input_file_path_str]
 
     try:
         subprocess.run(command, check=True)
@@ -26,5 +30,4 @@ def main():
         print(f"Помилка при запуску візуалізації: {e}")
 
 if __name__ == "__main__":
-
     main()

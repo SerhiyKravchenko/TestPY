@@ -40,12 +40,6 @@ def ranking_table(matches: dict, all_teams: set, coef = 0.85) -> dict:
         start_leaderboard = new_leaderboard
     return start_leaderboard
 
-aaa = read_matches("data/test_matches.csv")
-a = aaa[0]
-aa = aaa[1]
-
-# print(ranking_table_while(a, aa))
-
 
 def generate_random_table() -> str | None:
     try:
@@ -64,3 +58,4 @@ def get_teams() -> tuple[str, str]:
     letters = list(chr(i) for i in range(ord('A'), ord('Z') + 1))
     t1, t2 = random.sample(letters, 2)
     return txt + t1, txt + t2
+

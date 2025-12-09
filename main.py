@@ -11,7 +11,7 @@ def main():
     '''
     Docstring for main
     '''
-    input_dir = Path("/app/data")
+    input_dir = Path("//app//data")
 
     files = [f for f in input_dir.iterdir() if f.is_file()]
     path_to_script = "implementation/visual.py"
@@ -31,3 +31,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
